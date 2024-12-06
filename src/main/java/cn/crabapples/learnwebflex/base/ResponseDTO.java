@@ -1,6 +1,7 @@
 package cn.crabapples.learnwebflex.base;
 
 import cn.crabapples.learnwebflex.dic.DIC;
+import com.alibaba.fastjson2.JSONObject;
 import lombok.Getter;
 import lombok.Setter;
 
