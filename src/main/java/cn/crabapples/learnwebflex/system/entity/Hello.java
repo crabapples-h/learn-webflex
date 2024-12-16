@@ -15,5 +15,6 @@ public class Hello {
     private String id;
     private String name;
     private String username;
+    private String password;
 
 }
