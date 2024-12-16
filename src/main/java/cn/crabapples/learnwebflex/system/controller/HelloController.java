@@ -30,4 +30,9 @@ public class HelloController {
             return e;
         }).collectList().map(ResponseDTO::new);
     }
+
+    @RequestMapping("/ping")
+    public Mono<String> ping() {
+        return Mono.create(sink -> sink.success("Pong!"));
+    }
 }
