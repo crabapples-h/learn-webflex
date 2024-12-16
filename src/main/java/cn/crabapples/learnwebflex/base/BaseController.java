@@ -2,6 +2,7 @@ package cn.crabapples.learnwebflex.base;
 
 import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
@@ -17,7 +18,10 @@ import java.util.Set;
  * qq 294046317
  * pc-name 29404
  */
-public abstract class BaseController {
+public class BaseController<T> {
+    @Resource
+    protected T service;
+
     @Resource
     private Validator validator;
 
@@ -28,7 +32,7 @@ public abstract class BaseController {
      */
     protected final void validator(Object object, Class<?>... groups) {
         Set<ConstraintViolation<Object>> constraintViolations = validator.validate(object, groups);
-        for (ConstraintViolation constraintViolation : constraintViolations) {
+        for (ConstraintViolation<Object> constraintViolation : constraintViolations) {
             throw new ApplicationException(constraintViolation.getMessageTemplate());
         }
     }
