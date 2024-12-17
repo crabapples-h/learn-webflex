@@ -3,6 +3,7 @@ package cn.crabapples.learnwebflex.config.security;
 import cn.crabapples.learnwebflex.system.service.HelloService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AbstractUserDetailsReactiveAuthenticationManager;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
@@ -25,7 +26,8 @@ public class AuthUserManager extends AbstractUserDetailsReactiveAuthenticationMa
                 User.withUsername(username)
                         .password(e.getPassword())
                         .authorities("hello", "world", "ping")
-                        .roles("ADMIN")
+                        .authorities(new SimpleGrantedAuthority("world"))
+                        .roles("admin")
                         .build()).log();
     }
 }

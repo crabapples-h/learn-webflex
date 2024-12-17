@@ -1,9 +1,12 @@
 package cn.crabapples.learnwebflex.config.security;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableReactiveMethodSecurity;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
+import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.server.SecurityWebFilterChain;
 
 import static org.springframework.security.config.Customizer.withDefaults;
@@ -20,14 +23,11 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @Configuration
 // 踩坑！之前注解打成Servlet的了，排查了两个多小的问题，最后从spring文档中发现
 @EnableReactiveMethodSecurity
+@Slf4j
 public class SecurityConfigure {
-    //    private final AuthTokenManager tokenManager;
     private final AuthUserManager userManager;
 
-    public SecurityConfigure(
-//            AuthTokenManager tokenManager,
-            AuthUserManager userManager) {
-//        this.tokenManager = tokenManager;
+    public SecurityConfigure(AuthUserManager userManager) {
         this.userManager = userManager;
     }
 
@@ -41,6 +41,10 @@ public class SecurityConfigure {
                                 // 拦截剩余请求
                                 .anyExchange().authenticated()
                 )
+                .authorizeExchange(e -> {
+                    log.info("权限验证拦截:[{}]", e);
+                    System.err.println(e);
+                })
                 // 开启默认http认证
                 .httpBasic(withDefaults())
                 // 开启默认表单登录
@@ -50,4 +54,5 @@ public class SecurityConfigure {
                 .authenticationManager(userManager);
         return http.build();
     }
+
 }
