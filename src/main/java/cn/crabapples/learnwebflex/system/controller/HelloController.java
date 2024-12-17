@@ -30,7 +30,7 @@ public class HelloController {
 
     @RequestMapping("/world")
 //    @PreAuthorize("hasPermission('world')")
-    @PreAuthorize("@ss.hasPermission('system:user:remove')")
+    @PreAuthorize("@crabapples.hasPermission('system:user:remove')")
     public Mono<String> world() {
         return Mono.create(sink -> sink.success("world!"));
     }
