@@ -30,6 +30,7 @@ public class ChatController {
                 .messages(new UserMessage(message))
                 .stream()
                 .chatResponse()
+                .log()
                 .map(e -> {
                     Generation results = e.getResult();
                     AssistantMessage output = results.getOutput();
