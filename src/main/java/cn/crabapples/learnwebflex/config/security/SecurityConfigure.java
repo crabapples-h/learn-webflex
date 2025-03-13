@@ -3,6 +3,7 @@ package cn.crabapples.learnwebflex.config.security;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableReactiveMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
@@ -35,7 +36,7 @@ public class SecurityConfigure {
     SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
         http.authorizeExchange(exchanges -> exchanges
                                 // 放行所有GET请求 写法一
-//                        .pathMatchers(HttpMethod.GET).permitAll()
+                                .pathMatchers(HttpMethod.GET).permitAll()
                                 // 放行所有静态资源 写法二
 //                        .matchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                                 // 拦截剩余请求
