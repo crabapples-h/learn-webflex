@@ -11,9 +11,16 @@
         <java.version>17</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <spring-boot.version>3.1.6</spring-boot.version>
+        <spring-boot.version>3.4.3</spring-boot.version>
+        <spring-ai.version>1.0.0-SNAPSHOT</spring-ai.version>
+
     </properties>
     <dependencies>
+        <dependency>
+            <groupId>org.springframework.ai</groupId>
+            <artifactId>spring-ai-openai-spring-boot-starter</artifactId>
+            <version>1.0.0-M6</version>
+        </dependency>
 
         <!-- https://mvnrepository.com/artifact/io.r2dbc/r2dbc-spi -->
         <dependency>
@@ -22,11 +29,6 @@
             <version>1.2.0</version>
         </dependency>
 
-
-        <!--        <dependency>-->
-        <!--            <groupId>org.springframework.boot</groupId>-->
-        <!--            <artifactId>spring-boot-starter-web</artifactId>-->
-        <!--        </dependency>-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-webflux</artifactId>
@@ -106,7 +108,7 @@
         <dependency>
             <groupId>io.netty</groupId>
             <artifactId>netty-resolver-dns-native-macos</artifactId>
-<!--            <version>4.1.75.Final</version> &lt;!&ndash; 请根据实际情况选择合适的版本 &ndash;&gt;-->
+            <!--            <version>4.1.75.Final</version> &lt;!&ndash; 请根据实际情况选择合适的版本 &ndash;&gt;-->
             <classifier>osx-aarch_64</classifier>
         </dependency>
 
@@ -125,6 +127,26 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <repositories>
+        <repository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/milestone</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>spring-snapshots</id>
+            <name>Spring Snapshots</name>
+            <url>https://repo.spring.io/snapshot</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+        </repository>
+    </repositories>
+
 
     <build>
         <plugins>
